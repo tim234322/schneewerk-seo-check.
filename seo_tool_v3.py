@@ -214,9 +214,22 @@ with col2:
 
 st.markdown('<div class="notice">* Pflichtfeld. Die Website wird erst nach Eingabe einer gültigen E-Mail-Adresse geprüft.</div>', unsafe_allow_html=True)
 
+privacy_ok = st.checkbox(
+    "Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zur Durchführung des Website-Checks zu."
+)
+
+st.markdown("""
+🔒 [Datenschutzerklärung](https://www.schneewerk.net/datenschutz-rechtliches)
+
+📄 [Impressum](https://www.schneewerk.net/datenschutz-rechtliches)
+""")
+
 start = st.button("Website kostenlos prüfen", use_container_width=True)
 
 if start:
+    if not privacy_ok:
+        st.warning("Bitte Datenschutzerklärung bestätigen.")
+        st.stop()
     if not email:
         st.warning("Bitte E-Mail-Adresse eingeben.")
         st.stop()
